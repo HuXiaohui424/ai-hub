@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: hui-ai
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: deepseek-r1:7b
+        options:
+          temperature: 1
+    openai:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode
+#      api-key: ${OPENAI_API_KEY}
+      api-key: sk-abc123
+      chat:
+        options:
+          model: qwen-max-latest
+      embedding:
+        options:
+          model: text-embedding-v3
+          dimensions: 1024
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yzt?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowPublicKeyRetrieval=true&allowMultiQueries=true&useServerPrepStmts=false
+    username: root
+    password: mysql20250302034
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: debug
+    com.hui.ai: debug
+
+dromara:
+  x-file-storage: #文件存储配置
+    default-platform: minio-1 #默认使用的存储平台
+    #对应平台的配置写在这里，注意缩进要对齐
+    minio:
+      - platform: minio-1 # 存储平台标识
+        enable-storage: true  # 启用存储
+        access-key: minio
+        secret-key: minio123
+        end-point: http://localhost:9000
+        bucket-name: file
+        domain: http://localhost:9000/file/ # 访问域名，注意“/”结尾，例如：http://minio.abc.com/abc/
+        base-path: pdf/ # 基础路径
+
