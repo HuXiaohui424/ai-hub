@@ -38,7 +38,7 @@ public class ChatHistoryTask {
     private final FileStorageService fileStorageService;
     private final VectorStore vectorStore;
 
-    @Scheduled(cron = "* * 3 * * *")
+    @Scheduled(cron = "0 0 3 * * *")
     public void deleteAll() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         log.info("清空历史聊天记录");
         chatHistoryRepository.deleteAll();
